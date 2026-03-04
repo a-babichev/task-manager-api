@@ -20,7 +20,6 @@ def create_task():
 
     task = Task(
         title=data['title'],
-        description=data.get('description'),
     )
 
     db.session.add(task)
@@ -38,7 +37,6 @@ def update_task(task_id):
         return jsonify({'error': 'Invalid JSON'}), 400
 
     task.title = data.get('title', task.title)
-    task.description = data.get('description', task.description)
     task.completed = data.get('completed', task.completed)
 
     db.session.commit()
