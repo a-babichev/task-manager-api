@@ -9,9 +9,5 @@ class Task(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
 
     def to_dict(self):
-        return {
-            'id': self.id,
-            'title': self.title,
-            'completed': self.completed,
-            'created_at': self.created_at.isoformat(),
-        }
+        fields = self.__table__.columns.keys()
+        return {field: getattr(self, field) for field in fields}

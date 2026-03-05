@@ -16,7 +16,7 @@ def create_task():
     data = request.get_json()
 
     if not data or 'title' not in data:
-        return jsonify({'error': 'Title is required'}), 400
+        return jsonify({'ОШИБКА': 'Поле "title" обязательное.'}), 400
 
     task = Task(
         title=data['title'],
@@ -34,7 +34,7 @@ def update_task(task_id):
     data = request.get_json()
 
     if not data:
-        return jsonify({'error': 'Invalid JSON'}), 400
+        return jsonify({'ОШИБКА': 'Не соответсвует формату JSON.'}), 400
 
     task.title = data.get('title', task.title)
     task.completed = data.get('completed', task.completed)
@@ -50,4 +50,4 @@ def delete_task(task_id):
     db.session.delete(task)
     db.session.commit()
 
-    return jsonify({'message': 'Task deleted'})
+    return jsonify({'СООБЩЕНИЕ': 'Задача удалена.'})
